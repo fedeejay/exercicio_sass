@@ -1,0 +1,117 @@
+@use 'config/reset';
+@use 'config/variaveis';
+
+@function pixelParaEm($alvoEmPixel, $contextoEmPixel: 25) {
+    @return $alvoEmPixel / $contextoEmPixel +em;
+}
+
+@mixin button-styles {
+    background-color: variaveis.$corSecundaria;
+    color: #fff;
+    text-align: center;
+    padding: 8px 0;
+    border-radius: 8px;
+    margin-top: 8px;
+    text-decoration: none;
+
+    &:hover {
+        background-color: darken(variaveis.$corSecundaria, 10%);
+    }
+}
+
+body {
+    background-color: variaveis.$corDeFundo;
+}
+
+.container {
+    max-width: 1024px;
+    width: 100%;
+    margin: 0 auto;
+}
+
+header {
+    background-color: variaveis.$corPrincipal;
+    position: sticky;
+    top: 0;
+    left: 0;
+
+    .container {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px 0;
+    }
+}
+
+.menu li {
+    font-weight: bold;
+    margin-left: 24px;
+
+    a {
+        color: #fff;
+        text-decoration: none;
+    }
+}
+
+section {
+    padding: 56px 0;
+
+    .container {
+        h2 {
+            font-size: 24px;
+            margin-bottom: 16px;
+        }
+
+        .products {
+            margin-top: 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 32.66%);
+            column-gap: 1%;
+            row-gap: 4%;
+            width: 100%;
+            list-style: none;
+
+            li.product-item {
+                img {
+                    width: 100%;
+                    border-radius: 16px;
+                }
+
+                h4 {
+                    font-size: 18px;
+                    margin-top: 16px;
+                }
+
+                p {
+                    margin-top: 8px;
+                }
+
+                .product-button {
+                    display: block;
+                    @include button-styles;
+                }
+            }
+        }
+    }
+}
+
+@media screen and (max-width: variaveis.$tablet) {
+    .container {
+        max-width: 90%;
+    }
+}
+
+@media screen and (max-width: variaveis.$mobile) {
+    .container {
+        max-width: 80%;
+    }
+
+    section .container .products {
+        grid-template-columns: unset;
+    }
+
+    section .container .products li.product-item {
+        display: block;
+        margin-bottom: 16px;
+    }
+}
